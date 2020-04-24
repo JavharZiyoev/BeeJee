@@ -10,9 +10,9 @@ if($data == null)
 	echo "404";
 	die;
 }
-$className = "App\\Controllers\\" . $routes[$_SERVER['REQUEST_URI']][0] . "Controller";
-$action = $routes[$_SERVER['REQUEST_URI']][1];
+$className = "App\\Controllers\\" . $data[0] . "Controller";
+$action = $data[1];
 
 // Create Controller instance
 $obj = new $className();
-echo $obj->$action();
+return $obj->$action();

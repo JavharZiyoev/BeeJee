@@ -2,16 +2,21 @@
 
 namespace App\Controllers;
 
+use App\View;
 class TestController
 {
 	public function Index()
 	{
-		//View::Render();
-		return "hello";
+		return View::Render('tasks');
 	}
 	
-	public function Test()
+	public function Tasks()
 	{
-		return "Hi";
+		return View::Render('login');
+	}
+	
+	public function CC()
+	{
+		return "ll";
 	}
 }

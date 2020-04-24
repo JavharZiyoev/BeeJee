@@ -3,8 +3,8 @@ namespace App;
 
 class Routes {
 	private static $routes = [
-		"/some/link" => ["Test", "Index"],
-		"/test/a" => ["Test", "Test"]
+		"/" => ["Test", "Index"],
+		"/login" => ["Test", "Tasks"]
 	];
 	
 	public static function getRoutes()

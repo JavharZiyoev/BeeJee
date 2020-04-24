@@ -1,11 +1,21 @@
 <?php
 
-namespace BeeJee;
+namespace App;
 
-public static class View
+class View
 {
-	public static function Render()
+	public static function Render(string $template)
 	{
-		echo 1;
+		//$data = explode(".", $template);
+		$data = str_replace(".","/", $template);
+		
+		$file = dirname(__DIR__) . "/App/Views/$data.php";
+
+        if (is_readable($file)) {
+            require $file;
+        } else {
+            throw new \Exception("$file not found");
+        }
+		
 	}
 }
