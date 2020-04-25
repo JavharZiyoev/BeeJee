@@ -5,7 +5,8 @@ class Routes {
 	private static $routes = [
 		"/" => ["Tasks", "Index"],
 		"/tasks" => ["Tasks", "Index"],
-		"/login" => ["Tasks", "Tasks"]
+		"/tasks/add" => ["Tasks", "AddTask"],
+		"/login" => ["Login", "Login"]
 	];
 	
 	public static function getRoutes()

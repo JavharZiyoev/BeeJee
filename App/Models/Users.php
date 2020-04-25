@@ -10,11 +10,11 @@ class Tasks
 		$this->pdo = (new SQLiteConnection)->connect();
 	}
 	
-	public function getTasks(int $page=1, int $amount=3)
+	public function checkUser(int $page=1, int $amount=3)
 	{
 		$pdo = $this->pdo;
 		$s = ($page - 1) * $amount;
-		$sql = "SELECT username, email, content, status FROM tasks ORDER BY id DESC LIMIT $amount OFFSET $s;";
+		$sql = "SELECT * from ";
 		$stmt = $pdo->prepare($sql);
 		$stmt->execute();
 		if($data = $stmt->fetchAll())
