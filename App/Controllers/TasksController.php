@@ -8,7 +8,6 @@ class TasksController
 {
 	public function __construct()
 	{
-		$tasksObject = new Tasks();
 	}
 	public function Index()
 	{
@@ -25,8 +24,6 @@ class TasksController
 	
 	public function AddTask()
 	{
-		
-		$tasks = $tasksObject->getTasks($page, 3);
 		$tasksObject = new Tasks();
 		if(isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["text"]))
 		{

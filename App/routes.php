@@ -6,7 +6,9 @@ class Routes {
 		"/" => ["Tasks", "Index"],
 		"/tasks" => ["Tasks", "Index"],
 		"/tasks/add" => ["Tasks", "AddTask"],
-		"/login" => ["Login", "Login"]
+		"/login" => ["Login", "Login"],
+		"/auth" => ["Login", "Auth"],
+		"/logout" => ["Login", "LogOut"]
 	];
 	
 	public static function getRoutes()
