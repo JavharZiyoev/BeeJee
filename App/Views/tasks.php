@@ -7,7 +7,7 @@
   <nav class="navbar navbar-light bg-light justify-content-between ">
   <a class="navbar-brand "><span class="text-center">Javas</span></a
   <form class="form-inline">
-    <a href="" class="btn btn-outline-success my-2 my-sm-0" >Login</a>
+    <a href="/login" class="btn btn-outline-success my-2 my-sm-0" >Login</a>
   </form>
 </nav>
     <div class="container pt-5  justify-content-center ">
@@ -22,27 +22,31 @@
     </tr>
   </thead>
   <tbody>
+  <?php foreach($tasks as $task) {
+	echo "
     <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td>Larry</td>
-      <td>the Bird</td>
-      <td>@twitter</td>
-    </tr>
+      <th scope=\"row\">$task[0]</th>
+      <td>$task[1]</td>
+      <td>$task[2]</td>
+      <td>$task[3]</td>
+      <td>$task[4]</td>
+    </tr>";
+  }
+	?>
   </tbody>
 </table>
-
+	<nav aria-label="Page navigation example">
+      <ul class="pagination">
+	  
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+	  <?php
+		for($i=1; $i<$rowsAmount + 1; $i++)
+        echo "<li class=\"page-item\"><a class=\"page-link\" href=\"/tasks?page=$i\">$i</a></li>";
+	     
+		?>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+      </ul>
+	</nav>
 	</div>
   </body>
 </html>

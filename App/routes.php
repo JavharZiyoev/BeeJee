@@ -3,8 +3,9 @@ namespace App;
 
 class Routes {
 	private static $routes = [
-		"/" => ["Test", "Index"],
-		"/login" => ["Test", "Tasks"]
+		"/" => ["Tasks", "Index"],
+		"/tasks" => ["Tasks", "Index"],
+		"/login" => ["Tasks", "Tasks"]
 	];
 	
 	public static function getRoutes()
@@ -14,8 +15,14 @@ class Routes {
 	
 	public static function getControllerAndAction(string $route)
 	{
+		$_route = $route;
+		// for query params
+		if($pos = strpos($route, "?")) 
+		{
+			$_route = substr($route, 0, $pos);
+		}
 		$routes = self::$routes;
-		if(array_key_exists($route, $routes)) return $routes[$_SERVER['REQUEST_URI']];
+		if(array_key_exists($_route, $routes)) return $routes[$_route];
 		else return null;
 	}
 }

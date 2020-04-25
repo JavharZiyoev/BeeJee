@@ -4,9 +4,10 @@ namespace App;
 
 class View
 {
-	public static function Render(string $template)
+	public static function Render(string $template, array $vars = [])
 	{
 		//$data = explode(".", $template);
+		extract($vars);
 		$data = str_replace(".","/", $template);
 		
 		$file = dirname(__DIR__) . "/App/Views/$data.php";

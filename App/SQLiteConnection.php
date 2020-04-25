@@ -9,16 +9,21 @@ class SQLiteConnection {
      * PDO instance
      * @var type 
      */
-    private $pdo;
+    private static $pdo;
     /**
      * return in instance of the PDO object that connects to the SQLite database
      * @return \PDO
      */
     public function connect() {
 		 
-        if ($this->pdo == null) {
-            $this->pdo = new \PDO("sqlite:" . Config::SQLITE_FILE);
+        if (self::$pdo == null) {
+            self::$pdo = new \PDO("sqlite:" . Config::SQLITE_FILE);
         }
-        return $this->pdo;
+        return self::$pdo;
     }
+	
+	public static function getPdo()
+	{
+		return self::$pdo;
+	}
 }
