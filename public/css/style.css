@@ -25,7 +25,6 @@ th {
 	vertical-align: middle;
 }
 th { 
-	background-color: #DDD; 
 	font-weight: 400;
 }
 th a,
@@ -56,4 +55,7 @@ a.sort-by:before {
 a.sort-by:after {
 	border-top-color: #666;
 	margin-top: 1px;
+}
+a.sort-by.active {
+	color: skyblue;
 }

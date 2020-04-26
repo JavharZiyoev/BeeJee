@@ -4,8 +4,16 @@
     <link rel="stylesheet" href="/css/bootstrap4.min.css" >
   </head>
   <body>
-    <div class="container pt-5 d-flex justify-content-center ">
+    <div class="container pt-5 d-flex justify-content-center ">		
 	<form method="POST" action="/auth">
+	<?php
+		
+		  if(isset($_COOKIE['Message']) != null)
+	        echo "<div class=\"alert alert-danger\" role=\"alert\">".
+		  	       $_COOKIE['Message'].
+		          "</div>";
+			setcookie("Message", null);
+		?>
 	
       <div class="form-group ">
         <label for="username">Имя пользователя</label>

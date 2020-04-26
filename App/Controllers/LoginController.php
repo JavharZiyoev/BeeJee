@@ -33,6 +33,7 @@ class LoginController
 				header( "Location: /tasks" );
 			} else {
 				// didn't auth go back to loginform
+				setcookie("Message", "Неправильные&nbsp;реквезиты&nbsp;доступа", time() + (86400 * 30), "/");
 				header( "Location: /login" );
 			}
 		} else {

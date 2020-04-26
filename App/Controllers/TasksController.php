@@ -3,45 +3,62 @@
 namespace App\Controllers;
 
 use App\View;
-use App\Models\Tasks;
+use App\Models\Task;
 class TasksController
 {
+	private $backUrl;
+	private $page = 1;
+	
 	public function __construct()
 	{
+		if(isset($_SERVER['HTTP_REFERER'])) $this->backUrl = $_SERVER['HTTP_REFERER'];
+		if(isset($_GET['page'])) $this->page = htmlspecialchars($_GET['page']);
 	}
+	
 	public function Index()
 	{
-		$page = 1;
-		$sortField = "id";
-		$order = 1;
-		$tasksObject = new Tasks();
-		// for pagination
-		if(isset($_GET["page"]))
-		  $page = htmlspecialchars($_GET["page"]);
 	    // for sorting field
+		$sortField = null;
+		$order = @$_COOKIE['OrderType'];
 		if(isset($_GET["sortField"]))
 		{
 			$sortField = htmlspecialchars($_GET["sortField"]);
+			if($sortField == @$_COOKIE['SortField'])
+			{
+				$order = !@$_COOKIE['OrderType'];
+				setcookie("OrderType", $order, time() + (86400 * 30), "/");
+			}else 
+				setcookie("OrderType", 1, time() + (86400 * 30), "/");
+			setcookie("SortField", $sortField, time() + (86400 * 30), "/");
 			// for sorting order
-			
-			if(isset($_GET["order"]))
-				$order = htmlspecialchars($_GET["order"]);
-		}
-		$tasks = $tasksObject->getTasks($page, 3, $sortField, $order);
-		$paginationNumbers = $tasksObject->getNumberOfRows() / 3;
-		return View::Render('tasks', ['tasks' => $tasks, 'rowsAmount' => $paginationNumbers, "sortField" => $sortField, 'order' => $order, 'page' => $page]);
+		}else $sortField = $_COOKIE['SortField'];
+		$task = new Task();
+		$taskList = $task->getTasks($this->page, 3, $sortField, $order);
+		return View::Render('tasks', ['tasks' => $taskList, 'page' => $this->page, 'rowsAmount' =>$task->getNumberOfRows() / 3]);
 	}
 	
 	public function AddTask()
 	{
-		$tasksObject = new Tasks();
 		if(isset($_POST["username"]) && isset($_POST["email"]) && isset($_POST["text"]))
 		{
 			$username = htmlspecialchars($_POST["username"]);
 			$email = htmlspecialchars($_POST["email"]);
 			$text = htmlspecialchars($_POST["text"]);
-			$result = $tasksObject->insertTask($username, $email, $text);
-			if($result != null) return header('Location: /tasks');
+			$task = new Task();
+			$result = $task->insertTask($username, $email, $text);
+			$message = null;
+			if($result != null) $message = "Задача&nbsp;успешно&nbsp;добавлена";
+			setcookie("Message", $message, time() + (86400 * 30), "/");
+			return Header("Location: $this->backUrl");
+		}
+	}
+	
+	public function EditTask()
+	{
+		if(isset($_POST["text"]) && isset($_POST["status"]))
+		{
+			$text = htmlspecialchars($_POST["text"]);
+			$status = htmlspecialchars($_POST["status"]);
 		}
 	}
 	
