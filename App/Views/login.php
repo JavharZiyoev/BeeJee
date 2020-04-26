@@ -9,11 +9,11 @@
 	
       <div class="form-group ">
         <label for="username">Имя пользователя</label>
-        <input type="text" class="form-control" id="username" name="username"placeholder="Имя пользователя">
+        <input type="text" class="form-control" id="username" name="username" placeholder="Имя пользователя" required>
       </div>
       <div class="form-group">
         <label for="password">Пароль</label>
-        <input type="password" class="form-control" id="password" name="password" placeholder="Пароль">
+        <input type="password" class="form-control" id="password" name="password" placeholder="Пароль" required>
       </div>
       <button type="submit" class="btn btn-primary w-100">Submit</button>
     

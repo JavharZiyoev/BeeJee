@@ -12,14 +12,24 @@ class TasksController
 	public function Index()
 	{
 		$page = 1;
+		$sortField = "id";
+		$order = 1;
+		$tasksObject = new Tasks();
+		// for pagination
 		if(isset($_GET["page"]))
 		  $page = htmlspecialchars($_GET["page"]);
-		$amount = 3;
-		$tasksObject = new Tasks();
-		$tasks = $tasksObject->getTasks($page, 3);
-		if($tasks == null) $tasks = [];
-		$paginationNumbers = $tasksObject->getNumberOfRows() / $amount;
-		return View::Render('tasks', ['tasks' => $tasks, 'rowsAmount' => $paginationNumbers]);
+	    // for sorting field
+		if(isset($_GET["sortField"]))
+		{
+			$sortField = htmlspecialchars($_GET["sortField"]);
+			// for sorting order
+			
+			if(isset($_GET["order"]))
+				$order = htmlspecialchars($_GET["order"]);
+		}
+		$tasks = $tasksObject->getTasks($page, 3, $sortField, $order);
+		$paginationNumbers = $tasksObject->getNumberOfRows() / 3;
+		return View::Render('tasks', ['tasks' => $tasks, 'rowsAmount' => $paginationNumbers, "sortField" => $sortField, 'order' => $order, 'page' => $page]);
 	}
 	
 	public function AddTask()
