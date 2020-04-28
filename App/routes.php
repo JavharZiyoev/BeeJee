@@ -4,8 +4,9 @@ namespace App;
 class Routes {
 	private static $routes = [
 		"/" => ["Tasks", "Index"],
-		"/tasks" => ["Tasks", "Index", 0],
+		"/tasks" => ["Tasks", "Index"],
 		"/tasks/add" => ["Tasks", "AddTask", 1],
+		"/tasks/edit" => ["Tasks", "EditTask", 1],
 		"/login" => ["Login", "Login"],
 		"/logout" => ["Login", "Logout"],
 		"/auth" => ["Login", "Auth"]

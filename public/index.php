@@ -9,7 +9,7 @@ $data = Routes::getControllerAndAction($_SERVER['REQUEST_URI']);
 // Not Found
 if($data == null) 
 {
-	echo "404";
+	return Header("Location: /tasks");
 	die;
 }
 $className = "App\\Controllers\\" . $data[0] . "Controller";

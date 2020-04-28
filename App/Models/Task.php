@@ -56,7 +56,13 @@ class Task
 	}
 	public function updateTask($id, $text, $status)
 	{
+		$pdo = $this->pdo;
+		$sql = "UPDATE tasks SET content=\"$text\", status=$status, status=$status, changed=1 WHERE id=$id;";
+		echo $sql;
+		$stmt = $pdo->prepare($sql);
+		$result = $stmt->execute();
+		return $result;
+		return null;
 		
 	}
-	
 }

@@ -55,10 +55,17 @@ class TasksController
 	
 	public function EditTask()
 	{
-		if(isset($_POST["text"]) && isset($_POST["status"]))
+		if(isset($_POST["textEdit"]) && isset($_POST["status"]) && isset($_POST["editId"]))
 		{
-			$text = htmlspecialchars($_POST["text"]);
+			$text = htmlspecialchars($_POST["textEdit"]);
 			$status = htmlspecialchars($_POST["status"]);
+			$id = htmlspecialchars($_POST["editId"]);
+			$task = new Task();
+			$result = $task->updateTask($id, $text, $status);
+			$message = null;
+			if($result != null) $message = "Задача&nbsp;успешно&nbsp;изменена";
+			setcookie("Message", $message, time() + (86400 * 30), "/");
+			return Header("Location: $this->backUrl");
 		}
 	}
 	
